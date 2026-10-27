@@ -1,0 +1,541 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111310">
+  <meta name="description" content="AJ Cuts Barbershop website concept for a Nairobi barbershop on Ring Road.">
+  <title>AJ CUTS BARBERSHOP — Fresh Cuts. City Energy.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23111310'/%3E%3Cpath d='M12 49 27 14h10l15 35M20 33h24' fill='none' stroke='%23ee704b' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #111310;
+      --panel: #1b1e1a;
+      --cream: #f3f0e8;
+      --paper: #e5ddcf;
+      --muted: #a6a59d;
+      --orange: #ee704b;
+      --line: rgba(243,240,232,.16);
+      --sans: 'DM Sans', Arial, sans-serif;
+      --display: 'Manrope', Arial, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+    body.menu-open { overflow: hidden; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: var(--orange); color: var(--ink); }
+
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: auto; }
+    .section { padding: 92px 0; }
+    .eyebrow { color: var(--orange); font-size: .68rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+    .serif { font-family: var(--serif); font-weight: 500; font-style: italic; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 26px; margin-bottom: 35px; }
+    .section-head h2 { font: 800 clamp(2.4rem,5vw,4.7rem)/.98 var(--display); letter-spacing: -.065em; margin: 12px 0 0; }
+    .section-head p { max-width: 370px; color: #6f716a; font-size: .91rem; margin: 0; }
+
+    .button {
+      min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
+      gap: 12px; padding: 0 20px; border: 1px solid var(--orange);
+      background: var(--orange); color: #151612; font-size: .72rem;
+      font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+      cursor: pointer; transition: .22s;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--cream); border-color: var(--cream); }
+    .button-outline { background: transparent; color: var(--cream); border-color: rgba(243,240,232,.5); }
+    .button-outline:hover { color: var(--ink); }
+    .arrow { font-size: 1.1rem; }
+
+    /* Header */
+    .header { position: absolute; z-index: 20; top: 0; left: 0; right: 0; color: var(--cream); border-bottom: 1px solid rgba(255,255,255,.14); }
+    .nav { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--orange); color: var(--orange); font: 800 1rem var(--display); }
+    .brand-text { font: 800 .95rem var(--display); letter-spacing: .1em; }
+    .brand-text small { display: block; color: var(--orange); font: 600 .51rem var(--sans); letter-spacing: .18em; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 27px; }
+    .nav-links > a:not(.button) { font-size: .74rem; color: rgba(243,240,232,.8); }
+    .nav-links > a:not(.button):hover { color: var(--orange); }
+    .nav-links .button { min-height: 40px; padding: 0 14px; }
+    .menu-toggle { display: none; width: 42px; height: 42px; background: transparent; border: 1px solid var(--line); color: var(--cream); font-size: 1.3rem; cursor: pointer; }
+
+    /* Hero */
+    .hero { min-height: 720px; height: min(850px,100svh); position: relative; display: flex; align-items: center; isolation: isolate; overflow: hidden; background: #161814; color: var(--cream); padding: 120px 0 75px; }
+    .hero-image { position: absolute; inset: 0; z-index: -2; filter: saturate(.82); object-position: center 43%; animation: heroIn 1s ease both; }
+    .hero:before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,rgba(8,10,8,.88),rgba(8,10,8,.67) 38%,rgba(8,10,8,.12) 80%),linear-gradient(0deg,rgba(8,10,8,.72),transparent 48%,rgba(8,10,8,.18)); }
+    .hero-content { width: min(650px,72%); }
+    .hero h1 { font: 800 clamp(3.7rem,8.6vw,7.6rem)/.88 var(--display); letter-spacing: -.075em; margin: 22px 0; }
+    .hero h1 span { display: block; }
+    .hero h1 em { color: #f4e8d8; }
+    .hero-copy { max-width: 440px; color: rgba(243,240,232,.8); font-size: .96rem; line-height: 1.85; margin-bottom: 25px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 13px; margin-top: 30px; font-size: .74rem; color: rgba(243,240,232,.76); }
+    .stars { color: var(--orange); letter-spacing: .08em; }
+    .hero-stamp { position: absolute; right: 8%; top: 35%; width: 132px; height: 132px; border: 1px solid rgba(238,112,75,.75); border-radius: 50%; display: grid; place-items: center; text-align: center; font-size: .59rem; line-height: 1.6; letter-spacing: .12em; text-transform: uppercase; transform: rotate(8deg); background: rgba(17,19,16,.28); backdrop-filter: blur(3px); }
+    .hero-stamp b { display: block; color: var(--orange); font: italic 500 1.9rem var(--serif); }
+    .scroll-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; font-size: .61rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(243,240,232,.7); }
+    .scroll-cue:before { content: ""; width: 35px; height: 1px; background: var(--orange); }
+
+    /* Trust bar */
+    .trust { background: #263f35; color: var(--cream); padding: 18px 0; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+    .trust-item strong { font: 500 1.5rem var(--serif); color: #f29a73; }
+    .trust-item small { display: block; font-size: .59rem; font-weight: 500; letter-spacing: .08em; color: rgba(243,240,232,.65); }
+
+    /* Intro */
+    .intro-grid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: clamp(38px,7vw,88px); }
+    .intro-photo { height: 520px; position: relative; background: #cfc8bb; }
+    .intro-photo img { filter: saturate(.85); }
+    .photo-tag { position: absolute; left: -12px; bottom: 28px; background: var(--orange); padding: 14px 18px; font-size: .65rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .intro-copy h2 { font: 800 clamp(2.7rem,5.2vw,4.9rem)/.98 var(--display); letter-spacing: -.07em; margin: 15px 0 20px; }
+    .intro-copy p { color: #6d7068; font-size: .92rem; line-height: 1.9; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 27px 0; }
+    .stat { border-top: 1px solid rgba(17,19,16,.18); padding-top: 12px; }
+    .stat strong { display: block; font: 500 1.65rem var(--serif); }
+    .stat small { font-size: .65rem; color: #74766e; }
+
+    /* Nairobi */
+    .city { position: relative; min-height: 460px; isolation: isolate; overflow: hidden; display: flex; align-items: center; background: #161914; color: var(--cream); padding: 75px 0; }
+    .city img { position: absolute; inset: 0; z-index: -2; filter: saturate(.92) contrast(1.05); }
+    .city:before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,rgba(8,12,9,.9),rgba(8,12,9,.68) 42%,rgba(8,12,9,.18)),linear-gradient(0deg,rgba(8,12,9,.5),transparent 60%); }
+    .city h2 { font: 800 clamp(3rem,7vw,6rem)/.9 var(--display); letter-spacing: -.075em; margin: 17px 0; }
+    .city h2 em { color: #f5e8d5; }
+    .city p { max-width: 450px; color: rgba(243,240,232,.8); font-size: .93rem; line-height: 1.8; }
+    .city-note { display: flex; gap: 12px; align-items: center; margin: 24px 0; }
+    .city-pin { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--orange); color: var(--orange); }
+    .city-note strong,.city-note small { display: block; }
+    .city-note strong { font-size: .72rem; letter-spacing: .1em; }
+    .city-note small { color: rgba(243,240,232,.66); font-size: .73rem; }
+
+    /* Services */
+    .services { background: var(--ink); color: var(--cream); }
+    .services .section-head p { color: rgba(243,240,232,.64); }
+    .service-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; }
+    .service-card { min-width: 0; background: var(--panel); border: 1px solid rgba(243,240,232,.12); overflow: hidden; transition: transform .25s,border-color .25s; }
+    .service-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+    .service-photo { height: 220px; position: relative; overflow: hidden; }
+    .service-photo img { transition: transform .65s; filter: saturate(.83); }
+    .service-card:hover .service-photo img { transform: scale(1.05); }
+    .service-number { position: absolute; top: 14px; left: 14px; font-size: .65rem; letter-spacing: .15em; }
+    .service-content { padding: 20px 18px; }
+    .service-content h3 { font: 600 1.28rem var(--serif); margin: 0 0 8px; }
+    .service-content p { color: rgba(243,240,232,.65); font-size: .78rem; line-height: 1.7; min-height: 64px; }
+    .text-link { color: #f29a73; text-transform: uppercase; letter-spacing: .1em; font-size: .65rem; font-weight: 800; }
+    .service-note { font-size: .7rem; color: rgba(243,240,232,.55); margin-top: 20px; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 13px; }
+    .gallery-main,.gallery-small { position: relative; overflow: hidden; background: #ccc; }
+    .gallery-main { min-height: 500px; }
+    .gallery-stack { display: grid; grid-template-rows: 1fr 1fr; gap: 13px; }
+    .gallery-small { min-height: 240px; }
+    .gallery-main img,.gallery-small img { transition: transform .65s; filter: saturate(.85); }
+    .gallery-main:hover img,.gallery-small:hover img { transform: scale(1.04); }
+    .gallery-main:after,.gallery-small:after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(0deg,rgba(8,10,8,.75),transparent); }
+    .gallery-caption { position: absolute; z-index: 2; left: 23px; bottom: 23px; color: white; }
+    .gallery-caption small { color: #f29a73; letter-spacing: .17em; text-transform: uppercase; font-size: .64rem; }
+    .gallery-caption h3 { font: 500 clamp(1.5rem,3vw,2.7rem)/1 var(--serif); margin: 8px 0 0; }
+
+    /* Reviews */
+    .reviews { background: var(--paper); }
+    .review-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 13px; }
+    .review-card { background: var(--cream); border: 1px solid rgba(17,19,16,.1); padding: 24px; display: flex; flex-direction: column; min-height: 235px; }
+    .review-card blockquote { font: 500 1.2rem/1.45 var(--serif); margin: 16px 0 25px; }
+    .review-author { margin-top: auto; font-size: .7rem; font-weight: 800; }
+    .review-author small { display: block; font-size: .62rem; color: #777970; font-weight: 500; margin-top: 3px; }
+    .reviews-note { color: #777970; font-size: .68rem; margin-top: 20px; }
+
+    /* Contact and booking */
+    .visit { background: #dcd4c6; }
+    .visit-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; }
+    .visit h2 { font: 800 clamp(2.8rem,5.2vw,4.8rem)/.96 var(--display); letter-spacing: -.07em; margin: 15px 0 20px; }
+    .visit-copy > p { max-width: 390px; color: #696b63; font-size: .9rem; line-height: 1.85; }
+    .contact-list { margin-top: 26px; border-top: 1px solid rgba(17,19,16,.18); }
+    .contact-row { display: grid; grid-template-columns: 85px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(17,19,16,.18); font-size: .81rem; }
+    .contact-row span:first-child { color: #74766e; }
+    .booking-card { padding: clamp(22px,4vw,38px); background: var(--cream); border-top: 3px solid var(--orange); }
+    .booking-card h3 { font: 800 1.8rem var(--display); letter-spacing: -.05em; margin: 0 0 6px; }
+    .form-intro { font-size: .8rem; color: #777970; margin-bottom: 24px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 13px; }
+    .field.full { grid-column: 1/-1; }
+    .field label { font-size: .7rem; font-weight: 700; }
+    .field input,.field select,.field textarea { width: 100%; min-width: 0; padding: 12px; border: 1px solid rgba(17,19,16,.2); background: #fbfaf6; color: var(--ink); border-radius: 0; outline: none; }
+    .field input:focus,.field select:focus,.field textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 2px rgba(238,112,75,.15); }
+    .field textarea { min-height: 80px; resize: vertical; }
+    .booking-card .button { width: 100%; }
+    .fineprint { font-size: .64rem; line-height: 1.6; color: #777970; margin: 12px 0 0; }
+
+    /* FAQ and footer */
+    .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; }
+    .faq-intro h2 { font: 800 clamp(2.7rem,5vw,4.5rem)/.95 var(--display); letter-spacing: -.07em; margin: 14px 0; }
+    .faq-intro p { color: #70736b; font-size: .9rem; line-height: 1.8; }
+    .faq-list { border-top: 1px solid rgba(17,19,16,.18); }
+    .faq-item { border-bottom: 1px solid rgba(17,19,16,.18); }
+    .faq-question { border: 0; background: none; width: 100%; padding: 18px 0; display: flex; justify-content: space-between; gap: 15px; text-align: left; font-weight: 700; cursor: pointer; }
+    .faq-question span:last-child { font-size: 1.25rem; color: #b95737; transition: transform .2s; }
+    .faq-question[aria-expanded=true] span:last-child { transform: rotate(45deg); }
+    .faq-answer { display: none; color: #70736b; font-size: .83rem; line-height: 1.8; padding: 0 25px 18px 0; }
+    .faq-answer.open { display: block; }
+    footer { background: #0c0e0c; color: var(--cream); padding: 38px 0 22px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 25px; align-items: center; padding-bottom: 25px; }
+    .footer-top p { color: rgba(243,240,232,.56); font-size: .76rem; margin: 8px 0 0; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { font-size: .7rem; color: rgba(243,240,232,.66); }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-direction: column; gap: 7px; color: rgba(243,240,232,.46); font-size: .63rem; }
+    .demo { color: #f29a73; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease,transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes heroIn { from { opacity: .65; transform: scale(1.035); } to { opacity: 1; transform: scale(1); } }
+
+    @media(prefers-reduced-motion:reduce) {
+      *,*:before,*:after { scroll-behavior: auto!important; animation-duration: .01ms!important; transition-duration: .01ms!important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media(max-width:950px) {
+      .nav-links { gap: 16px; }
+      .nav-links>a:not(.button) { font-size: .7rem; }
+      .service-grid { grid-template-columns: repeat(2,1fr); }
+      .service-photo { height: 250px; }
+      .intro-grid { gap: 38px; }
+      .intro-photo { height: 460px; }
+      .visit-grid { gap: 30px; }
+      .faq-grid { gap: 35px; }
+    }
+    @media(max-width:680px) {
+      .wrap { width: calc(100% - 36px); }
+      .section { padding: 70px 0; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 15px; margin-bottom: 27px; }
+      .nav { height: 70px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links { display: none; position: fixed; inset: 70px 0 0; background: rgba(17,19,16,.98); height: calc(100dvh - 70px); padding: 25px 22px 35px; flex-direction: column; align-items: stretch; gap: 0; overflow-y: auto; }
+      .nav-links.open { display: flex; }
+      .nav-links>a:not(.button) { padding: 17px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
+      .nav-links .button { margin-top: 22px; }
+      .hero { height: auto; min-height: 780px; min-height: 100svh; padding: 125px 0 95px; }
+      .hero-image { object-position: 60% center; }
+      .hero:before { background: linear-gradient(90deg,rgba(8,10,8,.85),rgba(8,10,8,.4)),linear-gradient(0deg,rgba(8,10,8,.77),transparent 60%); }
+      .hero-content { width: 100%; }
+      .hero h1 { font-size: clamp(3.5rem,15vw,5.5rem); }
+      .hero-copy { font-size: .9rem; max-width: 345px; }
+      .hero-stamp { width: 100px; height: 100px; right: 18px; top: auto; bottom: 112px; font-size: .48rem; }
+      .hero-stamp b { font-size: 1.35rem; }
+      .scroll-cue { left: 18px; transform: none; }
+      .trust-grid { grid-template-columns: 1fr; gap: 15px; }
+      .trust-item { justify-content: flex-start; padding-left: 10px; border-left: 2px solid var(--orange); }
+      .intro-grid,.visit-grid,.faq-grid { grid-template-columns: 1fr; gap: 34px; }
+      .intro-photo { height: 420px; margin-right: 8px; }
+      .intro-copy h2 { font-size: clamp(2.7rem,12vw,4rem); }
+      .stats { gap: 9px; }
+      .stat strong { font-size: 1.4rem; }
+      .stat small { font-size: .6rem; }
+      .city { min-height: 550px; padding: 70px 0; }
+      .city img { object-position: 58% center; }
+      .city:before { background: linear-gradient(90deg,rgba(8,12,9,.88),rgba(8,12,9,.48)),linear-gradient(0deg,rgba(8,12,9,.65),transparent 65%); }
+      .service-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .service-photo { height: 190px; }
+      .service-content { padding: 15px 12px; }
+      .service-content h3 { font-size: 1.12rem; }
+      .service-content p { font-size: .72rem; min-height: 90px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-main { min-height: 380px; }
+      .gallery-stack { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; gap: 9px; }
+      .gallery-small { min-height: 225px; }
+      .gallery-caption { left: 14px; bottom: 15px; }
+      .gallery-caption h3 { font-size: 1.55rem; }
+      .review-grid { grid-template-columns: 1fr; }
+      .review-card { min-height: 200px; }
+      .form-grid { grid-template-columns: 1fr; gap: 0; }
+      .field.full { grid-column: auto; }
+      .contact-row { grid-template-columns: 75px 1fr; }
+      .footer-top,.footer-bottom { align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 13px; }
+    }
+    @media(max-width:380px) {
+      .service-grid { grid-template-columns: 1fr; }
+      .service-photo { height: 240px; }
+      .service-content p { min-height: 0; }
+      .hero-actions .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="AJ Cuts home"><span class="brand-mark">AJ</span><span class="brand-text">AJ CUTS<small>BARBERSHOP · NAIROBI 254</small></span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#experience">Experience</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Find us</a>
+        <a class="button" href="#visit">Book a chair <span class="arrow">↗</span></a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <img class="hero-image" src="https://images.pexels.com/photos/7697319/pexels-photo-7697319.jpeg?auto=compress&cs=tinysrgb&w=2200&q=85" alt="Black client getting a haircut in a barbershop" fetchpriority="high">
+      <div class="wrap">
+        <div class="hero-content">
+          <div class="eyebrow">NAIROBI · 254 · RING ROAD</div>
+          <h1><span>Fresh cuts.</span><span><em>City energy.</em></span></h1>
+          <p class="hero-copy">Nairobi moves fast. From the morning commute to after-work plans, show up sharp with a fresh cut and clean detailing at AJ Cuts in Zarafa on Ring Road.</p>
+          <div class="hero-actions">
+            <a class="button" href="#visit">Book your chair <span class="arrow">↗</span></a>
+            <a class="button button-outline" href="#services">Explore services <span class="arrow">↓</span></a>
+          </div>
+          <div class="hero-meta"><span class="stars">★★★★★</span><strong>5.0</strong><span>111 Google reviews*</span><span>·</span><span>Zarafa, Ring Road</span></div>
+        </div>
+      </div>
+      <div class="hero-stamp"><div><b>254</b>Nairobi<br>Ring Road</div></div>
+      <div class="scroll-cue">Scroll to explore</div>
+    </section>
+
+    <div class="trust"><div class="wrap trust-grid">
+      <div class="trust-item"><strong>254</strong><div>Nairobi pace<small>Fresh cuts for the city</small></div></div>
+      <div class="trust-item"><strong>01</strong><div>Ring Road<small>Zarafa · first floor</small></div></div>
+      <div class="trust-item"><strong>↗</strong><div>Karibu kwa kiti<small>Request your booking</small></div></div>
+    </div></div>
+
+    <section class="section" id="experience">
+      <div class="wrap intro-grid">
+        <div class="intro-photo reveal"><img src="https://images.pexels.com/photos/35157699/pexels-photo-35157699.jpeg?auto=compress&cs=tinysrgb&w=1100&q=85" alt="Black man getting a haircut in a modern barbershop" loading="lazy"><div class="photo-tag">Nairobi sharp. Every detail.</div></div>
+        <div class="intro-copy reveal">
+          <div class="eyebrow">More than a quick trim</div>
+          <h2>Come in for the cut.<br><span class="serif">Leave feeling like you.</span></h2>
+          <p>Around Nairobi, your day can move from the morning commute to work, campus or plans with friends in no time. The right cut should keep up: precise, personal and finished with care.</p>
+          <p>Customer feedback on the Google listing you shared highlights professional service, a welcoming atmosphere, and a beard makeover that left a lasting impression.</p>
+          <div class="stats">
+            <div class="stat"><strong>5.0★</strong><small>Google profile rating*</small></div>
+            <div class="stat"><strong>111</strong><small>Reviews on listing*</small></div>
+            <div class="stat"><strong>AJ</strong><small>Barbershop · Nairobi</small></div>
+          </div>
+          <a class="button" href="#visit">Plan your visit <span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="city" aria-label="AJ Cuts in Nairobi">
+      <img src="https://images.unsplash.com/photo-1741991110666-88115e724741?auto=format&fit=crop&w=2200&q=85" alt="Nairobi skyline with high-rise buildings and green city canopy" loading="lazy">
+      <div class="wrap">
+        <div class="eyebrow">NAIROBI, KENYA · 254</div>
+        <h2>The city moves.<br><em class="serif">Stay sharp.</em></h2>
+        <p>From the morning rush to after-work plans, take a moment for yourself before you get back into the Nairobi pace.</p>
+        <div class="city-note"><span class="city-pin">↗</span><span><strong>AJ CUTS BARBERSHOP</strong><small>Zarafa · 1st floor · Ring Road</small></span></div>
+        <a class="button button-outline" href="https://www.google.com/maps/search/?api=1&query=AJ+CUTS+BARBERSHOP+Zarafa+Ring+Road+Nairobi" target="_blank" rel="noopener noreferrer">Find your way <span class="arrow">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section services" id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">The service menu</div><h2>Clean work.<br><span class="serif">No shortcuts.</span></h2></div>
+          <p>Explore the grooming options presented in this website concept. Confirm the final service menu and prices directly with AJ Cuts before your visit.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <div class="service-photo"><img src="https://images.pexels.com/photos/7697319/pexels-photo-7697319.jpeg?auto=compress&cs=tinysrgb&w=800&q=85" alt="Barber cutting a Black client's hair" loading="lazy"><span class="service-number">01 / CUT</span></div>
+            <div class="service-content"><h3>Precision haircut</h3><p>A fresh shape with attention to balance, edges and the finish.</p><a class="text-link book-service" href="#visit" data-service="Precision haircut">Ask about this ↗</a></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-photo"><img src="https://images.pexels.com/photos/35157692/pexels-photo-35157692.jpeg?auto=compress&cs=tinysrgb&w=800&q=85" alt="Black client receiving a close fade" loading="lazy"><span class="service-number">02 / FADE</span></div>
+            <div class="service-content"><h3>Fade & detailing</h3><p>Careful blending and crisp detailing for a clean overall look.</p><a class="text-link book-service" href="#visit" data-service="Fade and detailing">Ask about this ↗</a></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-photo"><img src="https://images.pexels.com/photos/7697436/pexels-photo-7697436.jpeg?auto=compress&cs=tinysrgb&w=800&q=85" alt="Barber shaping a client's beard" loading="lazy"><span class="service-number">03 / BEARD</span></div>
+            <div class="service-content"><h3>Beard shaping</h3><p>Careful shaping and finishing to bring the whole look together.</p><a class="text-link book-service" href="#visit" data-service="Beard shaping">Ask about this ↗</a></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-photo"><img src="https://images.pexels.com/photos/7697396/pexels-photo-7697396.jpeg?auto=compress&cs=tinysrgb&w=800&q=85" alt="Professional barber tools ready for grooming" loading="lazy"><span class="service-number">04 / DETAIL</span></div>
+            <div class="service-content"><h3>Complete grooming</h3><p>A refreshed look with attention to the small finishing details.</p><a class="text-link book-service" href="#visit" data-service="Complete grooming refresh">Ask about this ↗</a></div>
+          </article>
+        </div>
+        <p class="service-note">Concept preview: these are suggested service categories, not a confirmed AJ Cuts price list or official service menu.</p>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">Inside the experience</div><h2>Good energy.<br><span class="serif">Good detail.</span></h2></div>
+          <p>Representative barbershop imagery to help show the atmosphere and craft; replace with AJ Cuts' own photos after permission.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-main reveal"><img src="https://images.pexels.com/photos/7697228/pexels-photo-7697228.jpeg?auto=compress&cs=tinysrgb&w=1300&q=85" alt="Black client at a barbershop" loading="lazy"><div class="gallery-caption"><small>The craft</small><h3>Precision in every detail.</h3></div></div>
+          <div class="gallery-stack">
+            <div class="gallery-small reveal"><img src="https://images.pexels.com/photos/35157692/pexels-photo-35157692.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Close-up haircut work on a Black client" loading="lazy"><div class="gallery-caption"><small>The finish</small><h3>Sharp from every angle.</h3></div></div>
+            <div class="gallery-small reveal"><img src="https://images.pexels.com/photos/7697436/pexels-photo-7697436.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Beard grooming by a barber" loading="lazy"><div class="gallery-caption"><small>The detail</small><h3>Care in the small things.</h3></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews" id="reviews">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">Customer words</div><h2>Good work<br><span class="serif">speaks for itself.</span></h2></div>
+          <p>These short excerpts come from the Google Maps reviews you shared. Review totals and dates may change.</p>
+        </div>
+        <div class="review-grid">
+          <article class="review-card reveal"><div class="stars">★★★★★</div><blockquote>“Cool and best barber shop with professional services.”</blockquote><div class="review-author">Alex<small>Google review · as shown in the listing you shared</small></div></article>
+          <article class="review-card reveal"><div class="stars">★★★★★</div><blockquote>“The experience and the service was top…”</blockquote><div class="review-author">Mohamed Qadar<small>Google review · as shown in the listing you shared</small></div></article>
+          <article class="review-card reveal"><div class="stars">★★★★★</div><blockquote>“I'm absolutely thrilled with the makeover Mark gave my beard!”</blockquote><div class="review-author">Goran Lojovic<small>Google review · as shown in the listing you shared</small></div></article>
+        </div>
+        <p class="reviews-note">Concept preview. Confirm review text and attribution against the current listing before official publication.</p>
+      </div>
+    </section>
+
+    <section class="section visit" id="visit">
+      <div class="wrap visit-grid">
+        <div class="visit-copy reveal">
+          <div class="eyebrow">Karibu · Ring Road</div>
+          <h2>Find your way<br><span class="serif">to a fresh cut.</span></h2>
+          <p>AJ Cuts Barbershop is listed at Zarafa, first floor, along Ring Road in Nairobi. Check current opening hours and confirm service availability before setting off.</p>
+          <div class="contact-list">
+            <div class="contact-row"><span>Address</span><span>Zarafa, 1st floor<br>Ring Rd, Nairobi</span></div>
+            <div class="contact-row"><span>Phone</span><a href="tel:+254797624522">0797 624522</a></div>
+            <div class="contact-row"><span>Hours</span><a href="https://www.google.com/maps/search/?api=1&query=AJ+CUTS+BARBERSHOP+Zarafa+Ring+Road+Nairobi" target="_blank" rel="noopener noreferrer">Check current hours on Google Maps ↗</a></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+            <a class="button" href="https://www.google.com/maps/search/?api=1&query=AJ+CUTS+BARBERSHOP+Zarafa+Ring+Road+Nairobi" target="_blank" rel="noopener noreferrer">Get directions ↗</a>
+            <a class="button" style="background:transparent;border-color:var(--ink);color:var(--ink)" href="tel:+254797624522">Call the shop</a>
+          </div>
+        </div>
+
+        <form class="booking-card reveal" id="bookingForm">
+          <h3>Request a booking</h3>
+          <p class="form-intro">Choose a service and preferred time. This form prepares a WhatsApp message for you to review and send.</p>
+          <div class="form-grid">
+            <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" placeholder="Your name" required></div>
+            <div class="field"><label for="phone">Your phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="07XX XXX XXX" required></div>
+            <div class="field full"><label for="service">Service</label><select id="service" name="service" required><option value="">Choose a service</option><option>Precision haircut</option><option>Fade and detailing</option><option>Beard shaping</option><option>Complete grooming refresh</option><option>Ask for service options</option></select></div>
+            <div class="field"><label for="date">Preferred date</label><input id="date" name="date" type="date" required></div>
+            <div class="field"><label for="time">Preferred time</label><select id="time" name="time" required><option value="">Select a time</option><option>10 am – 12 pm</option><option>12 pm – 2 pm</option><option>2 pm – 4 pm</option><option>4 pm – 6 pm</option><option>6 pm – 8 pm</option><option>8 pm – 10 pm</option><option>Flexible</option></select></div>
+            <div class="field full"><label for="notes">Preferred style or notes (optional)</label><textarea id="notes" name="notes" placeholder="Tell the barber what style you have in mind"></textarea></div>
+          </div>
+          <button type="submit" class="button">Continue to WhatsApp <span class="arrow">↗</span></button>
+          <p class="fineprint">Concept booking form only. It does not store details or confirm an appointment. WhatsApp opens with a draft message for you to review and send.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap faq-grid">
+        <div class="faq-intro reveal"><div class="eyebrow">Before you visit</div><h2>Good to<br><span class="serif">know.</span></h2><p>Helpful information for planning a visit. Confirm service availability and prices with the shop directly.</p><a class="text-link" style="color:var(--ink)" href="https://www.google.com/maps/search/?api=1&query=AJ+CUTS+BARBERSHOP+Zarafa+Ring+Road+Nairobi" target="_blank" rel="noopener noreferrer">Open Google listing ↗</a></div>
+        <div class="faq-list reveal">
+          <div class="faq-item"><button class="faq-question" aria-expanded="false"><span>Where is AJ Cuts located?</span><span>+</span></button><div class="faq-answer">The listing you shared places AJ Cuts Barbershop at Zarafa, first floor, along Ring Road in Nairobi. Use the directions link for navigation.</div></div>
+          <div class="faq-item"><button class="faq-question" aria-expanded="false"><span>How do I check service prices?</span><span>+</span></button><div class="faq-answer">Prices aren't confirmed in this website concept. Contact the shop directly to ask for current service prices before booking.</div></div>
+          <div class="faq-item"><button class="faq-question" aria-expanded="false"><span>Can I request a particular haircut?</span><span>+</span></button><div class="faq-answer">Use the booking form to draft a WhatsApp message with your preferred style, then review and send it to the shop.</div></div>
+          <div class="faq-item"><button class="faq-question" aria-expanded="false"><span>Are the opening hours current?</span><span>+</span></button><div class="faq-answer">Please check the current hours on Google Maps or call the shop, as opening times can change.</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div><a class="brand" href="#home"><span class="brand-mark">AJ</span><span class="brand-text">AJ CUTS<small>BARBERSHOP · NAIROBI 254</small></span></a><p>Nairobi pace. Clean cuts. Proper detail.</p></div>
+        <div class="footer-links"><a href="#experience">Experience</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#visit">Booking</a><a href="https://www.google.com/maps/search/?api=1&query=AJ+CUTS+BARBERSHOP+Zarafa+Ring+Road+Nairobi" target="_blank" rel="noopener noreferrer">Directions ↗</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> AJ CUTS BARBERSHOP · Website concept</span><span class="demo">Concept preview only — not the official website. Service details require owner approval. Photography is illustrative stock imagery; replace with AJ Cuts photos after permission.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      navLinks.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation');
+      menuToggle.textContent = '☰';
+    }
+
+    menuToggle.addEventListener('click', () => {
+      const opened = navLinks.classList.toggle('open');
+      document.body.classList.toggle('menu-open', opened);
+      menuToggle.setAttribute('aria-expanded', String(opened));
+      menuToggle.setAttribute('aria-label', opened ? 'Close navigation' : 'Open navigation');
+      menuToggle.textContent = opened ? '×' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('visible'));
+    }
+
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isOpen));
+        button.nextElementSibling.classList.toggle('open', !isOpen);
+      });
+    });
+
+    document.querySelectorAll('.book-service').forEach(link => {
+      link.addEventListener('click', () => {
+        const select = document.getElementById('service');
+        const requested = link.dataset.service;
+        for (const option of select.options) {
+          if (option.text.toLowerCase() === requested.toLowerCase()) {
+            select.value = option.value;
+            break;
+          }
+        }
+      });
+    });
+
+    const dateInput = document.getElementById('date');
+    const today = new Date();
+    dateInput.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+    document.getElementById('bookingForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const message = [
+        'Hello AJ Cuts Barbershop, I would like to request a booking.',
+        'Name: ' + data.get('name'),
+        'Phone: ' + data.get('phone'),
+        'Service: ' + data.get('service'),
+        'Preferred date: ' + data.get('date'),
+        'Preferred time: ' + data.get('time'),
+        data.get('notes') ? 'Notes: ' + data.get('notes') : ''
+      ].filter(Boolean).join('\n');
+
+      window.open('https://wa.me/254797624522?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
